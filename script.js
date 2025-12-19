@@ -17,28 +17,28 @@ const billCreditEl = document.getElementById("oneTimeCredit");
 const remainingPromoEl = document.getElementById("remainingPromo");
 
 function calculateData() {
-    const promoValue = promoValueEl.value;
-    const phoneValue = phoneValueEl.value;
-    const deviceCost = deviceCostEl.value;
-    const contractLength = Number(contractLengthEl.textContent);
+  const promoValue = Number(promoValueEl.value) || 0;
+  const phoneValue = Number(phoneValueEl.value) || 0;
+  const deviceCost = Number(deviceCostEl.value) || 0;
+  const contractLength = Number(contractLengthEl.textContent);
 
-    const grossSavings = promoValue - phoneValue;
-    const monthlyBeforeDis = roundToPenny(deviceCost / contractLength);
-    const monthlyPromoDis = roundToPenny(grossSavings / contractLength);
-    const monthlyAfterDis = roundToPenny(monthlyBeforeDis - monthlyPromoDis);
+  const grossSavings = promoValue - phoneValue;
+  const monthlyBeforeDis = roundToPenny(deviceCost / contractLength);
+  const monthlyPromoDis = roundToPenny(grossSavings / contractLength);
+  const monthlyAfterDis = roundToPenny(monthlyBeforeDis - monthlyPromoDis);
 
-    totalSavingsEl.textContent = `$${grossSavings}`;
-    monthlyCreditEl.textContent = `$${Number(monthlyPromoDis).toFixed(2)}`;
-    monthlyBeforeEl.textContent = `$${Number(monthlyBeforeDis).toFixed(2)}`;
-    creditAppliedEl.textContent = `-$${Number(monthlyPromoDis).toFixed(2)}`;
-    monthlyPayment.textContent = `$${Number(monthlyAfterDis).toFixed(2)}`;
+  totalSavingsEl.textContent = `$${grossSavings}`;
+  monthlyCreditEl.textContent = `$${Number(monthlyPromoDis).toFixed(2)}`;
+  monthlyBeforeEl.textContent = `$${Number(monthlyBeforeDis).toFixed(2)}`;
+  creditAppliedEl.textContent = `-$${Number(monthlyPromoDis).toFixed(2)}`;
+  monthlyPayment.textContent = `$${Number(monthlyAfterDis).toFixed(2)}`;
 
-    billCreditEl.textContent = `$${phoneValue}`;
-    remainingPromoEl.textContent = `$${grossSavings}`;
+  billCreditEl.textContent = `$${phoneValue}`;
+  remainingPromoEl.textContent = `$${grossSavings}`;
 }
 
 function roundToPenny(num) {
-    return Math.round(num * 100) / 100
+  return Math.round(num * 100) / 100
 }
 
 function toggleContractLength() {
@@ -58,4 +58,5 @@ submitBtn.addEventListener("click", calculateData)
 contractLengthButtonEl.addEventListener("click", () => {
   const term = toggleContractLength();
   updateTermDisplay(term);
+  calculateData()
 });
