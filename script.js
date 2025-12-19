@@ -2,6 +2,7 @@ const promoValueEl = document.getElementById("promoAmount");
 const phoneValueEl = document.getElementById("fmv");
 const deviceCostEl = document.getElementById("deviceCost");
 const submitBtn = document.getElementById("calcBtn");
+const resetBtn = document.getElementById("resetBtn")
 
 const contractLengthEl = document.getElementById("contract-length");
 const contractLengthButtonEl = document.getElementById("contract-length-button");
@@ -37,6 +38,17 @@ function calculateData() {
   remainingPromoEl.textContent = `$${grossSavings}`;
 }
 
+function resetDisplay() {
+  totalSavingsEl.textContent = `$0.00`;
+  monthlyCreditEl.textContent = `$0.00`;
+  monthlyBeforeEl.textContent = `$0.00`;
+  creditAppliedEl.textContent = `$0.00`;
+  monthlyPayment.textContent = `$0.00`;
+
+  billCreditEl.textContent = `$0.00`;
+  remainingPromoEl.textContent = `$0.00`;
+}
+
 function roundToPenny(num) {
   return Math.round(num * 100) / 100
 }
@@ -54,7 +66,9 @@ function updateTermDisplay(term) {
   });
 }
 
-submitBtn.addEventListener("click", calculateData)
+submitBtn.addEventListener("click", calculateData);
+resetBtn.addEventListener("click", resetDisplay);
+
 contractLengthButtonEl.addEventListener("click", () => {
   const term = toggleContractLength();
   updateTermDisplay(term);
