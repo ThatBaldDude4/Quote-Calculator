@@ -13,14 +13,14 @@
         <div class="brand-dot" aria-hidden="true"></div>
         <div class="top-text">
           <h1>Trade-In Promo Estimator</h1>
-          <p>Estimate your credits and what you’ll pay over 24 months.</p>
+          <p>Estimate your credits and what you’ll pay over <span class="data-term">24</span> months.</p>
         </div>
       </header>
 
       <section class="card" aria-label="Inputs">
         <div class="card-head">
           <h2>Inputs</h2>
-          <span class="pill">24-month credits</span>
+          <button id="contract-length-button" class="pill"><span id="contract-length">24</span>-month credits</button>
         </div>
 
         <form class="form" autocomplete="off">
@@ -42,7 +42,7 @@
           </label>
 
           <label class="field" for="fmv">
-            <span class="label">Phone market value (FMV)</span>
+            <span class="label">Fair market value (FMV)</span>
             <span class="hint">Applied as a one-time bill credit</span>
             <div class="money">
               <span class="prefix" aria-hidden="true">$</span>
@@ -99,7 +99,7 @@
             <p class="hero-kicker">You save</p>
             <!-- Set in JS: promo - fmv (clamped at >= 0 if you want) -->
             <p class="hero-amount" id="totalSavings">$0.00</p>
-            <p class="hero-sub">in promo credits over 24 months</p>
+            <p class="hero-sub">in promo credits over <span class="data-term">24</span> months</p>
           </div>
 
           <div class="hero-right">
@@ -107,7 +107,7 @@
               <p class="mini-label">Monthly promo credit</p>
               <!-- Set in JS: (promo - fmv)/24 -->
               <p class="mini-value" id="monthlyCredit">$0.00</p>
-              <p class="mini-sub">for 24 months</p>
+              <p class="mini-sub">for <span class="data-term">24</span> months</p>
             </div>
           </div>
         </div>
@@ -123,7 +123,7 @@
           <div class="row row-negative">
             <span class="row-label">Promo credit applied monthly</span>
             <!-- Set in JS: (promo - fmv)/24 -->
-            <span class="row-value" id="monthlyDiscount">-$0.00</span>
+            <span class="row-value" id="monthlyDiscount">$0.00</span>
           </div>
 
           <div class="divider" aria-hidden="true"></div>

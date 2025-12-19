@@ -3,6 +3,10 @@ const phoneValueEl = document.getElementById("fmv");
 const deviceCostEl = document.getElementById("deviceCost");
 const submitBtn = document.getElementById("calcBtn");
 
+const contractLengthEl = document.getElementById("contract-length");
+const contractLengthButtonEl = document.getElementById("contract-length-button");
+const dataTermElements = document.querySelectorAll(".data-term")
+
 const totalSavingsEl = document.getElementById("totalSavings");
 const monthlyCreditEl = document.getElementById("monthlyCredit");
 const monthlyBeforeEl = document.getElementById("monthlyBefore");
@@ -16,10 +20,11 @@ function calculateData() {
     const promoValue = promoValueEl.value;
     const phoneValue = phoneValueEl.value;
     const deviceCost = deviceCostEl.value;
+    const contractLength = Number(contractLengthEl.textContent);
 
     const grossSavings = promoValue - phoneValue;
-    const monthlyBeforeDis = roundToPenny(deviceCost / 24);
-    const monthlyPromoDis = roundToPenny(grossSavings / 24);
+    const monthlyBeforeDis = roundToPenny(deviceCost / contractLength);
+    const monthlyPromoDis = roundToPenny(grossSavings / contractLength);
     const monthlyAfterDis = roundToPenny(monthlyBeforeDis - monthlyPromoDis);
 
     totalSavingsEl.textContent = `$${grossSavings}`;
@@ -36,4 +41,21 @@ function roundToPenny(num) {
     return Math.round(num * 100) / 100
 }
 
+function toggleContractLength() {
+  const current = Number(contractLengthEl.textContent);
+  const next = current === 24 ? 36 : 24;
+  contractLengthEl.textContent = next;
+  return next;
+}
+
+function updateTermDisplay(term) {
+  dataTermElements.forEach(el => {
+    el.textContent = term;
+  });
+}
+
 submitBtn.addEventListener("click", calculateData)
+contractLengthButtonEl.addEventListener("click", () => {
+  const term = toggleContractLength();
+  updateTermDisplay(term);
+});
