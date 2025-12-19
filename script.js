@@ -23,7 +23,7 @@ function calculateData() {
     const monthlyAfterDis = roundToPenny(monthlyBeforeDis - monthlyPromoDis);
 
     totalSavingsEl.textContent = `$${grossSavings}`;
-    monthlyCreditEl.textContent = `-$${Number(monthlyPromoDis).toFixed(2)}`;
+    monthlyCreditEl.textContent = `$${Number(monthlyPromoDis).toFixed(2)}`;
     monthlyBeforeEl.textContent = `$${Number(monthlyBeforeDis).toFixed(2)}`;
     creditAppliedEl.textContent = `-$${Number(monthlyPromoDis).toFixed(2)}`;
     monthlyPayment.textContent = `$${Number(monthlyAfterDis).toFixed(2)}`;
