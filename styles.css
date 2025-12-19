@@ -382,6 +382,7 @@ input::placeholder {
 .foot {
   padding: 6px 2px 0;
   text-align: center;
+  min-height: 200px;
 }
 
 .foot-note {
