@@ -74,3 +74,5 @@ contractLengthButtonEl.addEventListener("click", () => {
   updateTermDisplay(term);
   calculateData()
 });
+
+// Adding this to test branch is working :)
