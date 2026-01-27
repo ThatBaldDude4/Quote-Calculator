@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Trade-In Promo Estimator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <main class="app" aria-label="Trade-In Promo Estimator">
+      <header class="top">
+        <div class="brand-dot" aria-hidden="true"></div>
+        <div class="top-text">
+          <h1>Trade-In Promo Estimator</h1>
+          <p>Estimate your credits and what you’ll pay over <span class="data-term">24</span> months.</p>
+        </div>
+      </header>
+
+      <section class="card" aria-label="Inputs">
+        <div class="card-head">
+          <h2>Inputs</h2>
+          <button id="contract-length-button" class="pill"><span id="contract-length">24</span>-month credits</button>
+        </div>
+
+        <form class="form" autocomplete="off">
+          <label class="field" for="promoAmount">
+            <span class="label">Promo amount</span>
+            <span class="hint">Example: 800 for “up to $800 off”</span>
+            <div class="money">
+              <span class="prefix" aria-hidden="true">$</span>
+              <input
+                id="promoAmount"
+                name="promoAmount"
+                type="number"
+                inputmode="decimal"
+                min="0"
+                step="0.01"
+                placeholder="0"
+              />
+            </div>
+          </label>
+
+          <label class="field" for="fmv">
+            <span class="label">Fair market value (FMV)</span>
+            <span class="hint">Applied as a one-time bill credit</span>
+            <div class="money">
+              <span class="prefix" aria-hidden="true">$</span>
+              <input
+                id="fmv"
+                name="fmv"
+                type="number"
+                inputmode="decimal"
+                min="0"
+                step="0.01"
+                placeholder="0"
+              />
+            </div>
+          </label>
+
+          <label class="field" for="deviceCost">
+            <span class="label">Desired device cost</span>
+            <span class="hint">Price before taxes/fees</span>
+            <div class="money">
+              <span class="prefix" aria-hidden="true">$</span>
+              <input
+                id="deviceCost"
+                name="deviceCost"
+                type="number"
+                inputmode="decimal"
+                min="0"
+                step="0.01"
+                placeholder="0"
+              />
+            </div>
+          </label>
+
+          <div class="actions">
+            <!-- Hook these buttons in JS -->
+            <button type="button" class="btn btn-primary" id="calcBtn">
+              Calculate
+            </button>
+            <button type="reset" class="btn btn-ghost" id="resetBtn">
+              Reset
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card" aria-label="Estimate">
+        <div class="card-head">
+          <h2>Estimate</h2>
+          <span class="pill pill-strong">Savings highlighted</span>
+        </div>
+
+        <!-- BIG SAVINGS STRIP -->
+        <div class="hero" role="group" aria-label="Savings summary">
+          <div class="hero-left">
+            <p class="hero-kicker">You save</p>
+            <!-- Set in JS: promo - fmv (clamped at >= 0 if you want) -->
+            <p class="hero-amount" id="totalSavings">$0.00</p>
+            <p class="hero-sub">in promo credits over <span class="data-term">24</span> months</p>
+          </div>
+
+          <div class="hero-right">
+            <div class="mini">
+              <p class="mini-label">Monthly promo credit</p>
+              <!-- Set in JS: (promo - fmv)/24 -->
+              <p class="mini-value" id="monthlyCredit">$0.00</p>
+              <p class="mini-sub">for <span class="data-term">24</span> months</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAYMENT BREAKDOWN -->
+        <div class="stack" role="group" aria-label="Monthly payment breakdown">
+          <div class="row">
+            <span class="row-label">Monthly cost before promo</span>
+            <!-- Set in JS: deviceCost / 24 -->
+            <span class="row-value" id="monthlyBefore">$0.00</span>
+          </div>
+
+          <div class="row row-negative">
+            <span class="row-label">Promo credit applied monthly</span>
+            <!-- Set in JS: (promo - fmv)/24 -->
+            <span class="row-value" id="monthlyDiscount">$0.00</span>
+          </div>
+
+          <div class="divider" aria-hidden="true"></div>
+
+          <div class="row row-total">
+            <span class="row-label">Estimated monthly payment</span>
+            <!-- Set in JS: (deviceCost/24) - ((promo-fmv)/24) -->
+            <span class="row-value" id="monthlyAfter">$0.00</span>
+          </div>
+        </div>
+
+        <!-- SECONDARY DETAILS -->
+        <details class="details">
+          <summary>
+            <span>Details</span>
+            <span class="chev" aria-hidden="true">▾</span>
+          </summary>
+
+          <div class="details-body" role="group" aria-label="Credit details">
+            <div class="row">
+              <span class="row-label">One-time bill credit (FMV)</span>
+              <!-- Set in JS: fmv -->
+              <span class="row-value" id="oneTimeCredit">$0.00</span>
+            </div>
+
+            <div class="row">
+              <span class="row-label">Remaining promo (Promo - FMV)</span>
+              <!-- Set in JS: promo - fmv (or clamp) -->
+              <span class="row-value" id="remainingPromo">$0.00</span>
+            </div>
+
+            <p class="fineprint">
+              Estimates only. Taxes/fees and eligibility may affect final credits.
+            </p>
+          </div>
+        </details>
+      </section>
+
+      <footer class="foot">
+        <p class="foot-note">• Built for quick customer clarity •</p>
+      </footer>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
