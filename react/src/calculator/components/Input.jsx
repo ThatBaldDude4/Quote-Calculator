@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-export function Input({label, type, id, key, onChange}) {
+export default function Input({label, type, id, key, onChange}) {
     return (
         <label className="label">
             {label}

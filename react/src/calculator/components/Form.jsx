@@ -1,11 +1,11 @@
 import {useState, usEffect, useRef} from 'react';
 
-export function Form() {
+
+export default function Form({children}) {
     return (
-        <>
-            <div>
-                <h1>TEST</h1>
-            </div>
-        </>
+        <form>
+            <p style={{color: "red"}}>HI</p>
+            {children}
+        </form>
     )
 }
