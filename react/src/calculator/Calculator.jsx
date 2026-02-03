@@ -7,6 +7,11 @@ export default function Calculator() {
     const [fairMarketAmont, setFairMarketAmount] = useState(0)
     const [phoneCost, setPhoneCost] = useState(0)
 
+    function calculateMontlyBillCredit() {
+        let result = ((promoAmount - fairMarketAmont) / 24).toFixed(2)
+        return result
+    }
+
     return (
         <Form>
             <Input 
@@ -30,7 +35,10 @@ export default function Calculator() {
                 key="phone-cost"
                 onChange={setPhoneCost}
             />
-            {<p>Total of all nums for tests: {Number(promoAmount) + Number(fairMarketAmont) + Number(phoneCost)}</p>}
+            <div className="bill-credit">
+                Monthly Bill Credit: {calculateMontlyBillCredit()}
+            </div>
+            {<p>Total of all nums for tests: {Number(promoAmount) * Number(fairMarketAmont) + Number(phoneCost)}</p>}
         </Form>
     )
 }
